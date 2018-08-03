@@ -9,6 +9,43 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.Row="0" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="150">
+            Deal or No Deal!
+        </TextBlock>
+        <Button Grid.Row="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                Height="75"
+                Width="150">
+            Continue
+        </Button>
+        <Button Grid.Row="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="75"
+                Width="150">
+            New Game
+        </Button>
+        <Button Grid.Row="4"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                Height="75"
+                Width="150">
+            Options
+        </Button>
 
     </Grid>
 </Page>
