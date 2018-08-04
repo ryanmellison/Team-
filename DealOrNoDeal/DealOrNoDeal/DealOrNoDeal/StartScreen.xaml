@@ -38,7 +38,7 @@
                 VerticalAlignment="Center"
                 Height="75"
                 Width="150"
-                FontSize="30"
+                FontSize="25"
                 Background="White">
         </Button>
         <Button Content="New Game"
@@ -48,7 +48,7 @@
                 VerticalAlignment="Center"
                 Height="75"
                 Width="150"
-                FontSize="30"
+                FontSize="25"
                 Background="White">
         </Button>
         <Button Content="Options"
@@ -58,7 +58,7 @@
                 VerticalAlignment="Center"
                 Height="75"
                 Width="150"
-                FontSize="30"
+                FontSize="25"
                 Background="White">
         </Button>
     
