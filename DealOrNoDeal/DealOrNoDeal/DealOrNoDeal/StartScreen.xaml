@@ -8,7 +8,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/homeScreenBackground.jpg"
+                        Opacity="0.85">
+            </ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -19,33 +25,45 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Grid.Row="0" 
+        <!--<TextBlock Text="Deal or No Deal!"
+                   Grid.Row="0" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="150">
-            Deal or No Deal!
-        </TextBlock>
-        <Button Grid.Row="2"
+                   FontSize="100">
+        </TextBlock>-->
+        <Button Content="Continue"
+                Click="Continue_Click"
+                Grid.Row="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Height="75"
-                Width="150">
-            Continue
+                Width="150"
+                FontSize="30"
+                Background="White">
         </Button>
-        <Button Grid.Row="3"
+        <Button Content="New Game"
+                Click="NewGame_Click"
+                Grid.Row="3"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Height="75"
-                Width="150">
-            New Game
+                Width="150"
+                FontSize="30"
+                Background="White">
         </Button>
-        <Button Grid.Row="4"
+        <Button Content="Options"
+                Click="Options_Click"
+                Grid.Row="4"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Height="75"
-                Width="150">
-            Options
+                Width="150"
+                FontSize="30"
+                Background="White">
         </Button>
-
+    
     </Grid>
+    
 </Page>
+
+<!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->

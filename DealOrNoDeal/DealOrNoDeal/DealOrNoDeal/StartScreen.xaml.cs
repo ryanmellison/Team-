@@ -26,5 +26,20 @@ namespace DealOrNoDeal
         {
             this.InitializeComponent();
         }
+
+        private void Continue_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ContinueGame));
+        }
+
+        private void NewGame_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(NewGame));
+        }
+
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Options));
+        }
     }
 }

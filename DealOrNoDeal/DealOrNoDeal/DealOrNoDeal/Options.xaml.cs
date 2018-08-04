@@ -20,9 +20,9 @@ namespace DealOrNoDeal
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewGame : Page
+    public sealed partial class Options : Page
     {
-        public NewGame()
+        public Options()
         {
             this.InitializeComponent();
         }
