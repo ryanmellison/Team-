@@ -9,6 +9,37 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/homeScreenBackground.jpg"
+                        Opacity="0.85">
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Deal or No Deal"
+                   Grid.Row="0" 
+                   Width="1500"
+                   Height="175"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="100"
+                   Foreground="White">
+        </TextBlock>
+        <Button x:Name="browseFilesButton"
+                Content="Browse For Save File"
+                Grid.Row="1"
+                FontSize="24"
+                Width="250"
+                Height="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                Click="openBtn_Click">
+            
+        </Button>
     </Grid>
 </Page>

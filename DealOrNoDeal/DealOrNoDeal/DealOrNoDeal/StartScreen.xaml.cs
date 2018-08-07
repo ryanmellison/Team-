@@ -34,7 +34,7 @@ namespace DealOrNoDeal
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NewGame));
+            this.Frame.Navigate(typeof(Game));
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)

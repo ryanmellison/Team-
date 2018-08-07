@@ -25,12 +25,17 @@
         </Grid.RowDefinitions>
 
 
-        <!--<TextBlock Text="Deal or No Deal!"
+        <TextBlock Text="Deal or No Deal"
                    Grid.Row="0" 
+                   Width="1500"
+                   Height="175"
+                   TextAlignment="Center"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   FontSize="100">
-        </TextBlock>-->
+                   FontSize="100"
+                   Foreground="White"
+                   >
+        </TextBlock>
         <Button Content="Continue"
                 Click="Continue_Click"
                 Grid.Row="2"
