@@ -98,9 +98,6 @@
     <Compile Include="ContinueGame.xaml.cs">
       <DependentUpon>ContinueGame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NewGame.xaml.cs">
-      <DependentUpon>NewGame.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -135,10 +132,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ContinueGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

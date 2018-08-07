@@ -29,7 +29,7 @@ namespace DealOrNoDeal
         {
             this.InitializeComponent();
         }
-        private async static void openBtn_Click(object sender, RoutedEventArgs e)
+        private async void openBtn_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -44,7 +44,7 @@ namespace DealOrNoDeal
 
                 var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                 var saveFile = new BitmapImage();
-                image.SetSource(stream);
+                //image.SetSource(stream);
                 //imageView.Source = image;
             }
             else
