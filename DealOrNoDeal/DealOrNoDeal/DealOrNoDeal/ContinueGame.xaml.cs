@@ -23,6 +23,9 @@ namespace DealOrNoDeal
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+    //StorageFolder installedLocation = Windows.ApplicationModel.Package.Current.InstalledLocation;
+
     public sealed partial class ContinueGame : Page
     {
         public ContinueGame()
@@ -34,22 +37,16 @@ namespace DealOrNoDeal
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            openPicker.FileTypeFilter.Add(".txt");
-
+            openPicker.FileTypeFilter.Add(".abcdefghijklmnopqrstuvwxyz"); //custom file types
             StorageFile file = await openPicker.PickSingleFileAsync();
-
 
             if (file != null)
             {
-
-                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                var saveFile = new BitmapImage();
-                //image.SetSource(stream);
-                //imageView.Source = image;
+                // Read in file and use it
             }
             else
             {
-                // 
+                // File is null
             }
         }
 
