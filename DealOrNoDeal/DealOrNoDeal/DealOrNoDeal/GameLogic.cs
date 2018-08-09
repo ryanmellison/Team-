@@ -25,7 +25,7 @@ namespace DealOrNoDeal
         }
         public static double RevealCase(int caseNum) //returns the case value 
         {
-            return AllCases[caseNum];
+            return AllCases[caseNum];  
         }
         public static void PickUserCase(int caseNum) //takes the number of the case and adds it to a new Dictionary so it can be stored/ then removes the case from the currentCase list
         {
