@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="DealOrNoDeal.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DealOrNoDeal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/homeScreenBackground.jpg"
+                        Opacity="0.85">
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Deal or No Deal"
+                   Grid.Row="0" 
+                   Width="1500"
+                   Height="175"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="100"
+                   Foreground="White"
+                   >
+        </TextBlock>
+        <Button Content="Continue"
+                Click="Continue_Click"
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="75"
+                Width="150"
+                FontSize="25"
+                Background="White">
+        </Button>
+        <Button Content="New Game"
+                Click="NewGame_Click"
+                Grid.Row="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="75"
+                Width="150"
+                FontSize="25"
+                Background="White">
+        </Button>
+        <Button Content="Options"
+                Click="Options_Click"
+                Grid.Row="4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="75"
+                Width="150"
+                FontSize="25"
+                Background="White">
+        </Button>
+
+    </Grid>
+</Page>
