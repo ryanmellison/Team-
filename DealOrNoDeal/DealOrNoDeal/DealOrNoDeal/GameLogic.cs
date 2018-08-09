@@ -37,5 +37,13 @@ namespace DealOrNoDeal
         {
             CurrentCases.Remove(caseNum);
         }
+        public static double BankerOffer()
+        {
+            double retVal;
+            double numOfCases = CurrentCases.Count();
+            double expectedValue = CurrentCases.Values.Average();
+            retVal = 12275.30 + (.748 * expectedValue) + (-2714.74 * numOfCases) + (.0000006986 * (expectedValue * expectedValue)) + (32.623 * (numOfCases * numOfCases));
+            return retVal;
+        }
     }
 }
