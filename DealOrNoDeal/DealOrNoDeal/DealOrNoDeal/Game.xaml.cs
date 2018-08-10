@@ -27,29 +27,28 @@ namespace DealOrNoDeal
         {
             int count = 1;
             this.InitializeComponent();
-            for(int i = 0; i < 7; i++)
+            for(int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 7; j++)
                 {
-                    string caseName = $"Case {count}";
-                    Button b = new Button();
-                    b.Content = caseName;
-                    b.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    b.VerticalAlignment = VerticalAlignment.Stretch;
-                    b.Margin = new Thickness(1);
-                    b.Background = new SolidColorBrush(Colors.Beige);
-                    if (j == 4 && i <=0 && i != 6)
+                    if (i == 3 && (j == 0 || j == 6))
                     {
-                        Grid.SetColumn(b, i);
-                        Grid.SetRow(b, j+1);
+
                     }
                     else
                     {
-                        Grid.SetColumn(b, i);
-                        Grid.SetRow(b, j);
+                        string caseName = $"Case {count}";
+                        Button b = new Button();
+                        b.Content = caseName;
+                        b.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        b.VerticalAlignment = VerticalAlignment.Stretch;
+                        b.Margin = new Thickness(1);
+                        b.Background = new SolidColorBrush(Colors.Beige);
+                        Grid.SetColumn(b, j);
+                        Grid.SetRow(b, i);
+                        gameGrid.Children.Add(b);
+                        count++;
                     }
-                    gameGrid.Children.Add(b);
-                    count++;
                 }
             }
         }

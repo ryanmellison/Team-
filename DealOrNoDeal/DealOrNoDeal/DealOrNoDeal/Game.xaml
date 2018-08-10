@@ -7,9 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <StackPanel>
+    
         <Grid x:Name="gameGrid">
-        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -24,10 +23,9 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
         </Grid>
-    </Grid>
-    </StackPanel>
+    
 
 </Page>
