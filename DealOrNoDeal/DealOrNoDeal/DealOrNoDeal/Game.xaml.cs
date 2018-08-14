@@ -51,6 +51,25 @@ namespace DealOrNoDeal
                     }
                 }
             }
+            int count2 = 1;
+            foreach(int value in GameLogic.Values)
+            {
+                TextBlock tb = new TextBlock();
+                tb.Text = value.ToString();
+                tb.HorizontalAlignment = HorizontalAlignment.Stretch;
+                if (count2 > 13)
+                {
+                    Grid.SetColumn(tb, 6);
+                    Grid.SetRow(tb, 4);
+                }
+                else
+                {
+                    Grid.SetColumn(tb, 0);
+                    Grid.SetRow(tb, 4);
+                }
+
+                count2++;
+            }
         }
     }
 }
