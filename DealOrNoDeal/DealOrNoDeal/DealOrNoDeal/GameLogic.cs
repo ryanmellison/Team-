@@ -13,14 +13,15 @@ namespace DealOrNoDeal
         public static Dictionary<double, double> CurrentCases = new Dictionary<double, double>();
         public static Dictionary<double, double> AllCases = new Dictionary<double, double>();
 
+
         public static void ProduceCases() //Go through each case and give it a Random Value
         {
             Random rnd = new Random();
             double[] MyRandomArray = Values.OrderBy(x => rnd.Next()).ToArray(); //Randomizes the Values[] into a new array
             for (int i = 0; i < Values.Count(); i++)
             {
-                CurrentCases.Add(Cases[i], MyRandomArray[i]); //adds the Case number as the Key, and the Values as the value
-                AllCases.Add(Cases[i], MyRandomArray[i]);
+                    CurrentCases.Add(Cases[i], MyRandomArray[i]); //adds the Case number as the Key, and the Values as the value
+                    AllCases.Add(Cases[i], MyRandomArray[i]);
             }
         }
         public static double RevealCase(int caseNum) //returns the case value 

@@ -25,6 +25,15 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="8*"></RowDefinition>
             </Grid.RowDefinitions>
+        <StackPanel x:Name="LeftStackPanel"
+                    Grid.Row="4"
+                    Grid.Column="0">
+            
+        </StackPanel>
+        <StackPanel x:Name="RightStackPanel"
+                    Grid.Row="4"
+                    Grid.Column="6">
+        </StackPanel>
         </Grid>
     
 

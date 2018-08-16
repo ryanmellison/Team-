@@ -1,10 +1,14 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,6 +27,8 @@ namespace DealOrNoDeal
     /// </summary>
     public sealed partial class Game : Page
     {
+        private StorageFile file;
+        private string savePath;
         public Game()
         {
             int count = 1;
@@ -37,7 +43,7 @@ namespace DealOrNoDeal
                     }
                     else
                     {
-                        string caseName = $"Case {count}";
+                        string caseName = $"{count}";
                         Button b = new Button();
                         b.Content = caseName;
                         b.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -47,29 +53,109 @@ namespace DealOrNoDeal
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
                         gameGrid.Children.Add(b);
+                        b.Click += Case_Click;
                         count++;
                     }
                 }
+                GameLogic.ProduceCases();
             }
             int count2 = 1;
-            foreach(int value in GameLogic.Values)
+            foreach(double value in GameLogic.Values)
             {
                 TextBlock tb = new TextBlock();
                 tb.Text = value.ToString();
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
+                tb.VerticalAlignment = VerticalAlignment.Stretch;
+                tb.TextAlignment = TextAlignment.Center;
+                //tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                 if (count2 > 13)
                 {
-                    Grid.SetColumn(tb, 6);
-                    Grid.SetRow(tb, 4);
+                    RightStackPanel.Children.Add(tb);
                 }
                 else
                 {
-                    Grid.SetColumn(tb, 0);
-                    Grid.SetRow(tb, 4);
+                    LeftStackPanel.Children.Add(tb);
                 }
-
                 count2++;
             }
         }
+
+        private void Case_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            if(b != null)
+            {
+                double.TryParse((string)b.Content, out double caseNumber);
+                GameLogic.CurrentCases.TryGetValue(caseNumber, out double caseValue);
+                var i = RightStackPanel.Children.ToList();
+                foreach(TextBlock v in i)
+                {
+                    double.TryParse(v.Text, out double d);
+                    if (d == caseValue)
+                    {
+                        v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                    }
+                }
+                var j = LeftStackPanel.Children.ToList();
+                foreach (TextBlock v in j)
+                {
+                    double.TryParse(v.Text, out double d);
+                    if (d == caseValue)
+                    {
+                        v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                    }
+                }
+            }
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(savePath))
+            {
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
+                file = await savePicker.PickSaveFileAsync();
+                if (file != null)
+                {
+                    savePath = file.Path;
+                    using (Stream fs = await file.OpenStreamForWriteAsync())
+                    {
+                        Serializer.Serialize(fs, GameLogic.AllCases);
+                    }
+                }
+            }
+            else
+            {
+                using (Stream fs = await file.OpenStreamForWriteAsync())
+                {
+                    //Serializer.Serialize(fs, contacts);
+                }
+            }
+
+        }
+
+        private async void Open_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
+            openPicker.FileTypeFilter.Add(".mellison");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+
+            if (file != null)
+            {
+
+                using (Stream st = await file.OpenStreamForReadAsync())
+                {
+                    //contacts = Serializer.Deserialize<Dictionary<double, double>>(st);
+                }
+            }
+            else
+            {
+
+            }
+        }
+
     }
 }
