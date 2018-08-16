@@ -83,12 +83,17 @@ namespace DealOrNoDeal
         private void Case_Click(object sender, RoutedEventArgs e)
         {
             var b = sender as Button;
-            if(b != null)
+            CaseReveal(b);
+        }
+
+        private void CaseReveal(Button b)
+        {
+            if (b != null)
             {
                 double.TryParse((string)b.Content, out double caseNumber);
                 GameLogic.CurrentCases.TryGetValue(caseNumber, out double caseValue);
                 var i = RightStackPanel.Children.ToList();
-                foreach(TextBlock v in i)
+                foreach (TextBlock v in i)
                 {
                     double.TryParse(v.Text, out double d);
                     if (d == caseValue)
@@ -105,6 +110,7 @@ namespace DealOrNoDeal
                         v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                     }
                 }
+                b.IsEnabled = false;
             }
         }
 

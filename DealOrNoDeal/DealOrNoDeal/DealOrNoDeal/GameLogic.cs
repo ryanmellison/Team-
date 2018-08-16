@@ -17,6 +17,8 @@ namespace DealOrNoDeal
         public static void ProduceCases() //Go through each case and give it a Random Value
         {
             Random rnd = new Random();
+            CurrentCases.Clear();
+            AllCases.Clear();
             double[] MyRandomArray = Values.OrderBy(x => rnd.Next()).ToArray(); //Randomizes the Values[] into a new array
             for (int i = 0; i < Values.Count(); i++)
             {
