@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
 namespace DealOrNoDeal
 {
@@ -12,6 +16,27 @@ namespace DealOrNoDeal
         public static double[] Values = new Double[] { .01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000 };
         public static Dictionary<double, double> CurrentCases = new Dictionary<double, double>();
         public static Dictionary<double, double> AllCases = new Dictionary<double, double>();
+        static public Dictionary<double, string> Case = new Dictionary<double, string>();
+
+        public static async Task SerializeAsync()
+        {
+            Case.Add(200, "200");
+            Case.Add(15, "15");
+            Case.Add(432, "432");
+            Case.Add(230, "230");
+
+            FileSavePicker picker = new FileSavePicker();
+            picker.FileTypeChoices.Add("file style", new string[] { ".txt" });
+            picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            picker.SuggestedFileName = "test";
+            Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile sampleFile = await localFolder.CreateFileAsync(picker.SuggestedFileName, CreationCollisionOption.ReplaceExisting);
+
+            using (Stream fs = await sampleFile.OpenStreamForWriteAsync())
+            {
+                Serializer.Serialize(fs, Case);
+            }
+        }
 
 
         public static void ProduceCases() //Go through each case and give it a Random Value
@@ -28,7 +53,7 @@ namespace DealOrNoDeal
         }
         public static double RevealCase(int caseNum) //returns the case value 
         {
-            return AllCases[caseNum];  
+            return AllCases[caseNum];
         }
         public static void PickUserCase(int caseNum) //takes the number of the case and adds it to a new Dictionary so it can be stored/ then removes the case from the currentCase list
         {
