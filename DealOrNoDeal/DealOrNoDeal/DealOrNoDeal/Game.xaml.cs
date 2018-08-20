@@ -36,11 +36,15 @@ namespace DealOrNoDeal
         {
             int count = 1;
             this.InitializeComponent();
+            if(go != null)
+            {
+                GameLogic.AllCases = go.AllCases;
+                GameLogic.CurrentCases = go.CurrentCases;
+                userCase = go.UserCase;
+            }
             GameLogic.ProduceCases();
 
-            GameLogic.AllCases = go.AllCases;
-            GameLogic.CurrentCases = go.CurrentCases;
-            userCase = go.UserCase;
+            
 
             for (int i = 1; i < 5; i++)
             {

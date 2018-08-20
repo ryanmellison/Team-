@@ -39,12 +39,12 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
         <StackPanel x:Name="LeftStackPanel"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0">
             
         </StackPanel>
         <StackPanel x:Name="RightStackPanel"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="6">
         </StackPanel>
         </Grid>
