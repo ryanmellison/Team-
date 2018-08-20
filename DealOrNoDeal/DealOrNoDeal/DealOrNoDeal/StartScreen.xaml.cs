@@ -1,10 +1,14 @@
-﻿using System;
+﻿using DealOrNoDeal.Models;
+using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,10 +31,7 @@ namespace DealOrNoDeal
             this.InitializeComponent();
         }
 
-        private void Continue_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(ContinueGame));
-        }
+
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
@@ -40,6 +41,31 @@ namespace DealOrNoDeal
         private void Options_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Options));
+        }
+        private async void Open_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
+            openPicker.FileTypeFilter.Add(".dond");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+
+            if (file != null)
+            {
+
+                using (Stream st = await file.OpenStreamForReadAsync())
+                {
+                    Game.go = Serializer.Deserialize<GameObject>(st);
+
+                }
+            }
+            else
+            {
+
+            }
+            this.Frame.Navigate(typeof(Game));
+
         }
     }
 }

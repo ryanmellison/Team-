@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-        <Grid x:Name="gameGrid">
-            <Grid.ColumnDefinitions>
+
+    <Grid x:Name="gameGrid">
+        <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -23,8 +23,21 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="8*"></RowDefinition>
-            </Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <CommandBar Grid.Row="0"
+                    Grid.ColumnSpan="7">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save"
+                              Label="Save"
+                              Click="Save_Click">
+                    
+                </AppBarButton>
+                
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
         <StackPanel x:Name="LeftStackPanel"
                     Grid.Row="4"
                     Grid.Column="0">

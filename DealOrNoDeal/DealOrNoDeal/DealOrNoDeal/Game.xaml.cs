@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using DealOrNoDeal.Models;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,17 +28,25 @@ namespace DealOrNoDeal
     /// </summary>
     public sealed partial class Game : Page
     {
+        public static GameObject go;
         private StorageFile file;
         private string savePath;
+        private Case userCase;
         public Game()
         {
             int count = 1;
             this.InitializeComponent();
-            for(int i = 0; i < 4; i++)
+            GameLogic.ProduceCases();
+
+            GameLogic.AllCases = go.AllCases;
+            GameLogic.CurrentCases = go.CurrentCases;
+            userCase = go.UserCase;
+
+            for (int i = 1; i < 5; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    if (i == 3 && (j == 0 || j == 6))
+                    if (i == 4 && (j == 0 || j == 6))
                     {
 
                     }
@@ -52,12 +61,16 @@ namespace DealOrNoDeal
                         b.Background = new SolidColorBrush(Colors.Beige);
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
+                        
+                        if (!GameLogic.CurrentCases.TryGetValue(count, out double numCase))
+                        {
+                            b.IsEnabled = false;
+                        }
                         gameGrid.Children.Add(b);
                         b.Click += Case_Click;
                         count++;
                     }
                 }
-                GameLogic.ProduceCases();
             }
             int count2 = 1;
             foreach(double value in GameLogic.Values)
@@ -118,6 +131,10 @@ namespace DealOrNoDeal
         {
             if (string.IsNullOrEmpty(savePath))
             {
+                go = new GameObject();
+                go.AllCases = GameLogic.AllCases;
+                go.CurrentCases = GameLogic.CurrentCases;
+                go.UserCase = userCase;
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
                 file = await savePicker.PickSaveFileAsync();
@@ -126,7 +143,7 @@ namespace DealOrNoDeal
                     savePath = file.Path;
                     using (Stream fs = await file.OpenStreamForWriteAsync())
                     {
-                        Serializer.Serialize(fs, GameLogic.AllCases);
+                        Serializer.Serialize(fs, go);
                     }
                 }
             }
@@ -140,29 +157,7 @@ namespace DealOrNoDeal
 
         }
 
-        private async void Open_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
-            openPicker.FileTypeFilter.Add(".mellison");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-
-            if (file != null)
-            {
-
-                using (Stream st = await file.OpenStreamForReadAsync())
-                {
-                    //contacts = Serializer.Deserialize<Dictionary<double, double>>(st);
-                }
-            }
-            else
-            {
-
-            }
-        }
-
+       
+        
     }
-    //test test
 }
