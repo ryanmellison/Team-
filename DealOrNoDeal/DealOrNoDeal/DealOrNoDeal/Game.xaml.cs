@@ -44,7 +44,11 @@ namespace DealOrNoDeal
             }
             GameLogic.ProduceCases();
 
-            
+            Dictionary<double, double> FlipFlop = new Dictionary<double, double>();
+            foreach (var item in GameLogic.CurrentCases)
+            {
+                FlipFlop.Add(item.Value, item.Key);
+            }
 
             for (int i = 1; i < 5; i++)
             {
@@ -76,6 +80,7 @@ namespace DealOrNoDeal
                     }
                 }
             }
+           
             int count2 = 1;
             foreach(double value in GameLogic.Values)
             {
@@ -84,7 +89,10 @@ namespace DealOrNoDeal
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
-                //tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                if (!FlipFlop.TryGetValue(value, out double d))
+                {
+                    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                }
                 if (count2 > 13)
                 {
                     RightStackPanel.Children.Add(tb);
@@ -128,6 +136,8 @@ namespace DealOrNoDeal
                     }
                 }
                 b.IsEnabled = false;
+                GameLogic.CurrentCases.Remove(caseNumber);
+
             }
         }
 
@@ -151,17 +161,6 @@ namespace DealOrNoDeal
                     }
                 }
             }
-            else
-            {
-                using (Stream fs = await file.OpenStreamForWriteAsync())
-                {
-                    //Serializer.Serialize(fs, contacts);
-                }
-            }
-
         }
-
-       
-        
     }
 }
