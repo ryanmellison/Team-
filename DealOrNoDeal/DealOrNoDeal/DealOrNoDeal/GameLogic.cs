@@ -54,57 +54,6 @@ namespace DealOrNoDeal
             retVal = 12275.30 + (.748 * expectedValue) + (-2714.74 * numOfCases) + (.0000006986 * (expectedValue * expectedValue)) + (32.623 * (numOfCases * numOfCases));
             return retVal;
         }
-
-        private async void Save()
-        {
-            if (string.IsNullOrEmpty(savePath))
-            {
-                FileSavePicker savePicker = new FileSavePicker();
-                savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
-                file = await savePicker.PickSaveFileAsync();
-                if (file != null)
-                {
-                    savePath = file.Path;
-                    using (Stream fs = await file.OpenStreamForWriteAsync())
-                    {
-                        Serializer.Serialize(fs, GameLogic.AllCases);
-                    }
-                }
-            }
-            else
-            {
-                using (Stream fs = await file.OpenStreamForWriteAsync())
-                {
-                    //Serializer.Serialize(fs, contacts);
-                }
-            }
-
-        }
-
-        private async void Open()
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
-            openPicker.FileTypeFilter.Add(".dond");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-
-            if (file != null)
-            {
-
-                using (Stream st = await file.OpenStreamForReadAsync())
-                {
-                    //contacts = Serializer.Deserialize<Dictionary<double, double>>(st);
-                }
-            }
-        }
-
-
     }
-
-
-
-
 }
 
