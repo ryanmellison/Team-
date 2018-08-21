@@ -57,14 +57,9 @@ namespace DealOrNoDeal
                 using (Stream st = await file.OpenStreamForReadAsync())
                 {
                     Game.go = Serializer.Deserialize<GameObject>(st);
-
+                    this.Frame.Navigate(typeof(Game));
                 }
             }
-            else
-            {
-
-            }
-            this.Frame.Navigate(typeof(Game));
 
         }
     }
