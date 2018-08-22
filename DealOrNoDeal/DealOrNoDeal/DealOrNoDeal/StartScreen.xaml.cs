@@ -56,11 +56,17 @@ namespace DealOrNoDeal
 
                 using (Stream st = await file.OpenStreamForReadAsync())
                 {
-                    Game.go = Serializer.Deserialize<GameObject>(st);
+                    GameObject go = new GameObject();
+                    go = Serializer.Deserialize<GameObject>(st);
+                    //string test = Serializer.Deserialize<string>(st);
+                    //Game.go.CurrentCases = GO.CurrentCases;
+                    //Game.go.AllCases = GO.AllCases;
+                    //Game.go.UserCase = GO.UserCase;
                     this.Frame.Navigate(typeof(Game));
                 }
             }
 
+            }
         }
     }
 }
