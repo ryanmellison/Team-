@@ -28,10 +28,12 @@ namespace DealOrNoDeal
     /// </summary>
     public sealed partial class Game : Page
     {
-        public static GameObject go;
+        public GameObject go;
         private StorageFile file;
         private string savePath;
         private Case userCase;
+        private TextBlock instructions;
+
         public Game()
         {
             int count = 1;
@@ -69,7 +71,7 @@ namespace DealOrNoDeal
                         b.Background = new SolidColorBrush(Colors.Beige);
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
-                        
+                        b.IsEnabled = false;
                         if (!GameLogic.CurrentCases.TryGetValue(count, out double numCase))
                         {
                             b.IsEnabled = false;
@@ -102,7 +104,7 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
-            }
+            }            
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
@@ -137,7 +139,7 @@ namespace DealOrNoDeal
                 }
                 b.IsEnabled = false;
                 GameLogic.CurrentCases.Remove(caseNumber);
-
+                instructions.Text = "You selected a case.";
             }
         }
 
@@ -157,9 +159,27 @@ namespace DealOrNoDeal
                     savePath = file.Path;
                     using (Stream fs = await file.OpenStreamForWriteAsync())
                     {
-                        Serializer.Serialize(fs, go);
+                        Serializer.Serialize(fs, savePath);
                     }
                 }
+            }
+        }
+
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            InstructionsStackPanel.Children.Remove(StartGameButton);
+            instructions = new TextBlock();
+            instructions.TextWrapping = TextWrapping.WrapWholeWords;
+            instructions.Text = "Please select your intial case. Your intial case will be your case filled with your potential prize money unless you take a deal with the dealer. Select wisely.";
+            instructions.HorizontalAlignment = HorizontalAlignment.Stretch;
+            instructions.VerticalAlignment = VerticalAlignment.Stretch;
+            instructions.TextAlignment = TextAlignment.Center;
+            InstructionsStackPanel.Children.Add(instructions);
+            var list = gameGrid.Children.ToList();
+            for(int i = 4; i < 30; i++)
+            {
+                Button b = (Button)list[4];
+                b.IsEnabled = true;
             }
         }
     }

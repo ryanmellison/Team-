@@ -26,7 +26,7 @@ namespace DealOrNoDeal.Models
         //    }
         //    else
         //    {
-        //        return "Does Not Exisit";
+        //        return "Does Not Exist";
         //    }
         //}
 
