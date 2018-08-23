@@ -2,24 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DealOrNoDeal.Models
 {
-    [ProtoContract]
+    [DataContract]
     public class Case
     {
+        [DataMember]
         private int caseNumber;
-        [ProtoMember(1)]
         public int CaseNumber 
         {
             get { return caseNumber; }
             set { caseNumber = value; }
         }
 
+        [DataMember]
         private double caseValue;
-        [ProtoMember(2)]
 
         public double CaseValue
         {
@@ -27,6 +28,14 @@ namespace DealOrNoDeal.Models
             set { caseValue = value; }
         }
 
+        [DataMember]
+        private bool isOpened;
+
+        public bool IsOpened
+        {
+            get { return isOpened; }
+            set { isOpened = value; }
+        }
 
     }
 }

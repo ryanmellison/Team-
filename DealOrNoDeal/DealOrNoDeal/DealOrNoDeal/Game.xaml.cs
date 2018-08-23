@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml;
+using System.Xml.Serialization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -33,6 +34,7 @@ namespace DealOrNoDeal
         public GameObject go;
         private StorageFile file;
         private string savePath;
+        private Case userCase = GameLogic.userCase;
         private Case userCase;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -62,18 +64,16 @@ namespace DealOrNoDeal
             this.InitializeComponent();
             if (go != null)
             {
-                GameLogic.AllCases = go.AllCases;
-                GameLogic.CurrentCases = go.CurrentCases;
                 userCase = go.UserCase;
             }
             GameLogic.ProduceCases();
+            ButtonCreation();
+            ValueDisplayCreation();                       
+        }
 
-            Dictionary<double, double> FlipFlop = new Dictionary<double, double>();
-            foreach (var item in GameLogic.CurrentCases)
-            {
-                FlipFlop.Add(item.Value, item.Key);
-            }
-
+        private void ButtonCreation()
+        {
+            int count = 1;
             for (int i = 1; i < 5; i++)
             {
                 for (int j = 0; j < 7; j++)
@@ -99,29 +99,30 @@ namespace DealOrNoDeal
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
                         b.IsEnabled = false;
-                        if (!GameLogic.CurrentCases.TryGetValue(count, out double numCase))
-                        {
-                            b.IsEnabled = false;
-                        }
                         gameGrid.Children.Add(b);
                         b.Click += Case_Click;
                         count++;
                     }
                 }
             }
-           
+        }
+
+        private void ValueDisplayCreation()
+        {
             int count2 = 1;
-            foreach (double value in GameLogic.Values)
+            foreach (Case c in GameLogic.cases)
             {
                 TextBlock tb = new TextBlock();
-                tb.Text = value.ToString();
+                tb.Text = c.CaseValue.ToString();
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
-                if (!FlipFlop.TryGetValue(value, out double d))
+
+                if (c.IsOpened)
                 {
                     tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                 }
+
                 if (count2 > 13)
                 {
                     RightStackPanel.Children.Add(tb);
@@ -131,7 +132,7 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
-            }            
+            }
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
@@ -144,8 +145,8 @@ namespace DealOrNoDeal
         {
             if (b != null)
             {
-                double.TryParse((string)b.Content, out double caseNumber);
-                GameLogic.CurrentCases.TryGetValue(caseNumber, out double caseValue);
+                int.TryParse((string)b.Content, out int caseNumber);
+                double caseValue = GameLogic.cases[caseNumber].CaseValue;
                 var i = RightStackPanel.Children.ToList();
                 foreach (TextBlock v in i)
                 {
@@ -165,7 +166,7 @@ namespace DealOrNoDeal
                     }
                 }
                 b.IsEnabled = false;
-                GameLogic.CurrentCases.Remove(caseNumber);
+                GameLogic.cases[caseNumber].IsOpened = true;
                 instructions.Text = "You selected a case.";
             }
         }
@@ -174,19 +175,19 @@ namespace DealOrNoDeal
         {
             if (string.IsNullOrEmpty(savePath))
             {
-                go = new GameObject();
-                go.AllCases = GameLogic.AllCases;
-                go.CurrentCases = GameLogic.CurrentCases;
                 go.UserCase = userCase;
+                go.Cases = GameLogic.cases;
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
+                XmlSerializer ser = new XmlSerializer(typeof(GameObject));
                 file = await savePicker.PickSaveFileAsync();
                 if (file != null)
                 {
                     savePath = file.Path;
                     using (Stream fs = await file.OpenStreamForWriteAsync())
                     {
-                        Serializer.Serialize(fs, savePath);
+                        ser.Serialize(fs, go);
+                        //    (fs, savePath);
                     }
                 }
             }
