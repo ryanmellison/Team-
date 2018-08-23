@@ -39,7 +39,7 @@ namespace DealOrNoDeal
         {
             int count = 1;
             this.InitializeComponent();
-            if(go != null)
+            if (go != null)
             {
                 GameLogic.AllCases = go.AllCases;
                 GameLogic.CurrentCases = go.CurrentCases;
@@ -83,9 +83,9 @@ namespace DealOrNoDeal
                     }
                 }
             }
-           
+
             int count2 = 1;
-            foreach(double value in GameLogic.Values)
+            foreach (double value in GameLogic.Values)
             {
                 TextBlock tb = new TextBlock();
                 tb.Text = value.ToString();
@@ -105,7 +105,7 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
-            }            
+            }
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
@@ -166,6 +166,7 @@ namespace DealOrNoDeal
             }
         }
 
+        int buttoncount = 0;
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
             InstructionsStackPanel.Children.Remove(StartGameButton);
@@ -181,7 +182,13 @@ namespace DealOrNoDeal
             {
                 Button b = (Button)list[i];
                 b.IsEnabled = true;
+                b.Click += button_counter;
             }
+        }
+
+        private void button_counter(object sender, EventArgs e)
+        {
+            buttoncount++;
         }
     }
 }
