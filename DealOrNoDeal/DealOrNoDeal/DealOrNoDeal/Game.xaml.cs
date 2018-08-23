@@ -194,6 +194,7 @@ namespace DealOrNoDeal
             }
         }
 
+        private int buttoncount = 0;
         private void button_counter(object sender, EventArgs e)
         {
             //buttoncount++;
