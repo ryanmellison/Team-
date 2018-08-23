@@ -31,7 +31,7 @@ namespace DealOrNoDeal
     /// </summary>
     public sealed partial class Game : Page
     {
-        public GameObject go;
+        public static GameObject go;
         private StorageFile file;
         private string savePath;
         private Case userCase = GameLogic.userCase;
@@ -72,8 +72,6 @@ namespace DealOrNoDeal
                         b.Background = brush1;
                         b.Width = 100;
                         b.Height = 90;
-
-
                         b.HorizontalAlignment = HorizontalAlignment.Center;
                         //b.VerticalAlignment = VerticalAlignment.Stretch;
                         //b.Margin = new Thickness(5);
@@ -82,6 +80,14 @@ namespace DealOrNoDeal
                         Grid.SetRow(b, i);
                         b.IsEnabled = false;
                         gameGrid.Children.Add(b);
+                        //button.DataContext = cell;
+                        //BoolToBrushConverter con = new BoolToBrushConverter();
+                        //Binding b = new Binding();
+                        //b.Path = new PropertyPath("IsAlive");
+                        //b.Mode = BindingMode.TwoWay;
+                        //b.Converter = con;
+                        //button.SetBinding(Button.BackgroundProperty, b);
+                        //button.Click += cell.Toggle;
                         b.Click += Case_Click;
                         count++;
                     }
@@ -92,18 +98,19 @@ namespace DealOrNoDeal
         private void ValueDisplayCreation()
         {
             int count2 = 1;
-            foreach (Case c in GameLogic.cases)
+            foreach (double value in GameLogic.Values)
             {
                 TextBlock tb = new TextBlock();
-                tb.Text = c.CaseValue.ToString();
+                tb.Text = value.ToString();
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
+                tb.Foreground = new SolidColorBrush(Colors.White);
 
-                if (c.IsOpened)
-                {
-                    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                }
+                //if (c.IsOpened)
+                //{
+                //    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                //}
 
                 if (count2 > 13)
                 {
@@ -114,6 +121,30 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
+            }
+            foreach(Case c in GameLogic.cases)
+            {
+                if (c.IsOpened)
+                {
+                    var i = RightStackPanel.Children.ToList();
+                    foreach (TextBlock v in i)
+                    {
+                        double.TryParse(v.Text, out double d);
+                        if (d == c.CaseValue)
+                        {
+                            v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        }
+                    }
+                    var j = LeftStackPanel.Children.ToList();
+                    foreach (TextBlock v in j)
+                    {
+                        double.TryParse(v.Text, out double d);
+                        if (d == c.CaseValue)
+                        {
+                            v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        }
+                    }
+                }
             }
         }
 
@@ -128,7 +159,7 @@ namespace DealOrNoDeal
             if (b != null)
             {
                 int.TryParse((string)b.Content, out int caseNumber);
-                double caseValue = GameLogic.cases[caseNumber].CaseValue;
+                double caseValue = GameLogic.cases[caseNumber - 1].CaseValue;
                 var i = RightStackPanel.Children.ToList();
                 foreach (TextBlock v in i)
                 {
@@ -148,8 +179,8 @@ namespace DealOrNoDeal
                     }
                 }
                 b.IsEnabled = false;
-                GameLogic.cases[caseNumber].IsOpened = true;
-                instructions.Text = "You selected a case.";
+                GameLogic.cases[caseNumber - 1].IsOpened = true;
+                //instructions.Text = "You selected a case.";
             }
         }
 
@@ -157,7 +188,7 @@ namespace DealOrNoDeal
         {
             if (string.IsNullOrEmpty(savePath))
             {
-                go.UserCase = userCase;
+                go.UserCase = new Case() { CaseNumber = GameLogic.userCase.CaseNumber, CaseValue = GameLogic.userCase.CaseValue, IsOpened = GameLogic.userCase.IsOpened };
                 go.Cases = GameLogic.cases;
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
@@ -169,7 +200,6 @@ namespace DealOrNoDeal
                     using (Stream fs = await file.OpenStreamForWriteAsync())
                     {
                         ser.Serialize(fs, go);
-                        //    (fs, savePath);
                     }
                 }
             }
@@ -179,12 +209,15 @@ namespace DealOrNoDeal
         {
             InstructionsStackPanel.Children.Remove(StartGameButton);
             instructions = new TextBlock();
+            instructions.Margin = new Thickness(0, 300, 0, 0);
             instructions.TextWrapping = TextWrapping.WrapWholeWords;
             instructions.Text = "Please select your intial case. Your intial case will be your case filled with your potential prize money unless you take a deal with the dealer. Select wisely.";
-            instructions.HorizontalAlignment = HorizontalAlignment.Stretch;
-            instructions.VerticalAlignment = VerticalAlignment.Stretch;
+            instructions.HorizontalAlignment = HorizontalAlignment.Center;
+            instructions.VerticalAlignment = VerticalAlignment.Bottom;
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
+            instructions.FontSize = 20;
+            instructions.Foreground = new SolidColorBrush(Colors.White);
             var list = gameGrid.Children.ToList();
             for(int i = 4; i < 30; i++)
             {
