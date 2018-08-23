@@ -116,7 +116,20 @@
     <None Include="DealOrNoDeal_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AudioAssets\Case is being opened.mp3" />
+    <Content Include="Assets\AudioAssets\The banker is calling  phone.mp3" />
+    <Content Include="Assets\AudioAssets\Theme Song alternate.mp3" />
+    <Content Include="Assets\AudioAssets\Theme Song.mp3" />
     <Content Include="Assets\homeScreenBackground.jpg" />
+    <Content Include="Assets\VisualAssets\5997788904.png" />
+    <Content Include="Assets\VisualAssets\CasePic.png" />
+    <Content Include="Assets\VisualAssets\deal-or-no-deal.png" />
+    <Content Include="Assets\VisualAssets\Deal_or_No_Deal_Logo.png" />
+    <Content Include="Assets\VisualAssets\DfrPif2UcAAisdh.png" />
+    <Content Include="Assets\VisualAssets\dond.png" />
+    <Content Include="Assets\VisualAssets\dond_blank.jpg" />
+    <Content Include="Assets\VisualAssets\dond_easterLogo.png" />
+    <Content Include="Assets\VisualAssets\dond_logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

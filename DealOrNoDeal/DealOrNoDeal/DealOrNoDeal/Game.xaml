@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="gameGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/VisualAssets/dond_blank.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -19,11 +22,11 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
+                <RowDefinition Height="1.2*"></RowDefinition>
                 <RowDefinition Height="7*"></RowDefinition>
 
         </Grid.RowDefinitions>
@@ -60,8 +63,7 @@
                     HorizontalAlignment="Center"
                     Width="150"
                     Height="100"
-                    Click="StartGameButton_Click"
-                    >
+                    Click="StartGameButton_Click">
                 
             </Button>
         </StackPanel>

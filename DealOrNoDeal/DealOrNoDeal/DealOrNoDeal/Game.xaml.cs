@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,10 +34,30 @@ namespace DealOrNoDeal
         private StorageFile file;
         private string savePath;
         private Case userCase;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        ImageBrush brush1 = new ImageBrush();
+=======
         private TextBlock instructions;
 
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
         public Game()
         {
+            brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/VisualAssets/CasePic.png"));
             int count = 1;
             this.InitializeComponent();
             if (go != null)
@@ -66,10 +87,15 @@ namespace DealOrNoDeal
                         string caseName = $"{count}";
                         Button b = new Button();
                         b.Content = caseName;
-                        b.HorizontalAlignment = HorizontalAlignment.Stretch;
-                        b.VerticalAlignment = VerticalAlignment.Stretch;
-                        b.Margin = new Thickness(1);
-                        b.Background = new SolidColorBrush(Colors.Beige);
+                        b.Background = brush1;
+                        b.Width = 100;
+                        b.Height = 90;
+
+
+                        b.HorizontalAlignment = HorizontalAlignment.Center;
+                        //b.VerticalAlignment = VerticalAlignment.Stretch;
+                        //b.Margin = new Thickness(5);
+                        //b.Background = new SolidColorBrush(Colors.Beige);
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
                         b.IsEnabled = false;
@@ -83,7 +109,7 @@ namespace DealOrNoDeal
                     }
                 }
             }
-
+           
             int count2 = 1;
             foreach (double value in GameLogic.Values)
             {
@@ -105,7 +131,7 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
-            }
+            }            
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
@@ -166,7 +192,6 @@ namespace DealOrNoDeal
             }
         }
 
-        int buttoncount = 0;
         private void StartGameButton_Click(object sender, RoutedEventArgs e)
         {
             InstructionsStackPanel.Children.Remove(StartGameButton);
@@ -178,7 +203,7 @@ namespace DealOrNoDeal
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
             var list = gameGrid.Children.ToList();
-            for (int i = 4; i < 30; i++)
+            for(int i = 4; i < 30; i++)
             {
                 Button b = (Button)list[i];
                 b.IsEnabled = true;
