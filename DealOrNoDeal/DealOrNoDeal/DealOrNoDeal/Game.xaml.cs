@@ -35,32 +35,14 @@ namespace DealOrNoDeal
         private StorageFile file;
         private string savePath;
         private Case userCase = GameLogic.userCase;
-        private Case userCase;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         ImageBrush brush1 = new ImageBrush();
-=======
+
         private TextBlock instructions;
 
->>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
-=======
-        private TextBlock instructions;
-
->>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
-=======
-        private TextBlock instructions;
-
->>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
-=======
-        private TextBlock instructions;
-
->>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
         public Game()
         {
             brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/VisualAssets/CasePic.png"));
-            int count = 1;
             this.InitializeComponent();
             if (go != null)
             {
@@ -208,13 +190,13 @@ namespace DealOrNoDeal
             {
                 Button b = (Button)list[i];
                 b.IsEnabled = true;
-                b.Click += button_counter;
+                //b.Click += button_counter;
             }
         }
 
         private void button_counter(object sender, EventArgs e)
         {
-            buttoncount++;
+            //buttoncount++;
         }
     }
 }
