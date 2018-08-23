@@ -105,7 +105,8 @@ namespace DealOrNoDeal
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
-                
+                tb.Foreground = new SolidColorBrush(Colors.White);
+
                 //if (c.IsOpened)
                 //{
                 //    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
@@ -208,12 +209,15 @@ namespace DealOrNoDeal
         {
             InstructionsStackPanel.Children.Remove(StartGameButton);
             instructions = new TextBlock();
+            instructions.Margin = new Thickness(0, 300, 0, 0);
             instructions.TextWrapping = TextWrapping.WrapWholeWords;
             instructions.Text = "Please select your intial case. Your intial case will be your case filled with your potential prize money unless you take a deal with the dealer. Select wisely.";
-            instructions.HorizontalAlignment = HorizontalAlignment.Stretch;
-            instructions.VerticalAlignment = VerticalAlignment.Stretch;
+            instructions.HorizontalAlignment = HorizontalAlignment.Center;
+            instructions.VerticalAlignment = VerticalAlignment.Bottom;
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
+            instructions.FontSize = 20;
+            instructions.Foreground = new SolidColorBrush(Colors.White);
             var list = gameGrid.Children.ToList();
             for(int i = 4; i < 30; i++)
             {
