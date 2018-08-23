@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -176,9 +177,9 @@ namespace DealOrNoDeal
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
             var list = gameGrid.Children.ToList();
-            for(int i = 4; i < 30; i++)
+            for (int i = 4; i < 30; i++)
             {
-                Button b = (Button)list[4];
+                Button b = (Button)list[i];
                 b.IsEnabled = true;
             }
         }

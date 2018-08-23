@@ -60,7 +60,8 @@
                     HorizontalAlignment="Center"
                     Width="150"
                     Height="100"
-                    Click="StartGameButton_Click">
+                    Click="StartGameButton_Click"
+                    >
                 
             </Button>
         </StackPanel>
