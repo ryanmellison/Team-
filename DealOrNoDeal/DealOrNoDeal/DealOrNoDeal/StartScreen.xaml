@@ -8,12 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    
+
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/homeScreenBackground.jpg"
-                        Opacity="0.85">
-            </ImageBrush>
+            <ImageBrush ImageSource="Assets/VisualAssets/dond_blank.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -24,18 +22,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-
-        <TextBlock Text="Deal or No Deal"
-                   Grid.Row="0" 
-                   Width="1500"
-                   Height="175"
-                   TextAlignment="Center"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="100"
-                   Foreground="White"
-                   >
-        </TextBlock>
+        <Image x:Name="Logo" Width="900" Source="Assets/VisualAssets/Deal_or_No_Deal_Logo.png" HorizontalAlignment="Center" Margin="0,76,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
         <Button Content="Continue"
                 Click="Open_Click"
                 Grid.Row="2"
@@ -66,9 +53,9 @@
                 FontSize="25"
                 Background="White">
         </Button>
-    
+
     </Grid>
-    
+
 </Page>
 
 <!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->

@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/VisualAssets/dond_blank.jpg"/>
+        </Grid.Background>
 
     </Grid>
 </Page>

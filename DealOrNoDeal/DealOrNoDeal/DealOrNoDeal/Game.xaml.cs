@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,12 +29,34 @@ namespace DealOrNoDeal
     /// </summary>
     public sealed partial class Game : Page
     {
-        public static GameObject go;
+        public GameObject go;
         private StorageFile file;
         private string savePath;
         private Case userCase;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        ImageBrush brush1 = new ImageBrush();
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
+=======
+        private TextBlock instructions;
+
+>>>>>>> 81d4c829d24364be77a7cd1916983c05b12de9fa
         public Game()
         {
+            brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/VisualAssets/CasePic.png"));
             int count = 1;
             this.InitializeComponent();
             if(go != null)
@@ -44,7 +67,11 @@ namespace DealOrNoDeal
             }
             GameLogic.ProduceCases();
 
-            
+            Dictionary<double, double> FlipFlop = new Dictionary<double, double>();
+            foreach (var item in GameLogic.CurrentCases)
+            {
+                FlipFlop.Add(item.Value, item.Key);
+            }
 
             for (int i = 1; i < 5; i++)
             {
@@ -59,13 +86,18 @@ namespace DealOrNoDeal
                         string caseName = $"{count}";
                         Button b = new Button();
                         b.Content = caseName;
-                        b.HorizontalAlignment = HorizontalAlignment.Stretch;
-                        b.VerticalAlignment = VerticalAlignment.Stretch;
-                        b.Margin = new Thickness(1);
-                        b.Background = new SolidColorBrush(Colors.Beige);
+                        b.Background = brush1;
+                        b.Width = 100;
+                        b.Height = 90;
+
+
+                        b.HorizontalAlignment = HorizontalAlignment.Center;
+                        //b.VerticalAlignment = VerticalAlignment.Stretch;
+                        //b.Margin = new Thickness(5);
+                        //b.Background = new SolidColorBrush(Colors.Beige);
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
-                        
+                        b.IsEnabled = false;
                         if (!GameLogic.CurrentCases.TryGetValue(count, out double numCase))
                         {
                             b.IsEnabled = false;
@@ -76,6 +108,7 @@ namespace DealOrNoDeal
                     }
                 }
             }
+           
             int count2 = 1;
             foreach(double value in GameLogic.Values)
             {
@@ -84,7 +117,10 @@ namespace DealOrNoDeal
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
-                //tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                if (!FlipFlop.TryGetValue(value, out double d))
+                {
+                    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                }
                 if (count2 > 13)
                 {
                     RightStackPanel.Children.Add(tb);
@@ -94,7 +130,7 @@ namespace DealOrNoDeal
                     LeftStackPanel.Children.Add(tb);
                 }
                 count2++;
-            }
+            }            
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
@@ -128,6 +164,8 @@ namespace DealOrNoDeal
                     }
                 }
                 b.IsEnabled = false;
+                GameLogic.CurrentCases.Remove(caseNumber);
+                instructions.Text = "You selected a case.";
             }
         }
 
@@ -147,21 +185,28 @@ namespace DealOrNoDeal
                     savePath = file.Path;
                     using (Stream fs = await file.OpenStreamForWriteAsync())
                     {
-                        Serializer.Serialize(fs, go);
+                        Serializer.Serialize(fs, savePath);
                     }
                 }
             }
-            else
-            {
-                using (Stream fs = await file.OpenStreamForWriteAsync())
-                {
-                    //Serializer.Serialize(fs, contacts);
-                }
-            }
-
         }
 
-       
-        
+        private void StartGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            InstructionsStackPanel.Children.Remove(StartGameButton);
+            instructions = new TextBlock();
+            instructions.TextWrapping = TextWrapping.WrapWholeWords;
+            instructions.Text = "Please select your intial case. Your intial case will be your case filled with your potential prize money unless you take a deal with the dealer. Select wisely.";
+            instructions.HorizontalAlignment = HorizontalAlignment.Stretch;
+            instructions.VerticalAlignment = VerticalAlignment.Stretch;
+            instructions.TextAlignment = TextAlignment.Center;
+            InstructionsStackPanel.Children.Add(instructions);
+            var list = gameGrid.Children.ToList();
+            for(int i = 4; i < 30; i++)
+            {
+                Button b = (Button)list[4];
+                b.IsEnabled = true;
+            }
+        }
     }
 }
