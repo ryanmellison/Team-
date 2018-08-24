@@ -145,6 +145,7 @@ namespace DealOrNoDeal
                     if (d == caseValue)
                     {
                         v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        v.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
                 var j = LeftStackPanel.Children.ToList();
@@ -154,6 +155,7 @@ namespace DealOrNoDeal
                     if (d == caseValue)
                     {
                         v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        v.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
                 b.IsEnabled = false;
