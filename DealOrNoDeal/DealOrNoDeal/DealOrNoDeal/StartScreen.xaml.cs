@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DealOrNoDeal
@@ -71,19 +72,21 @@ namespace DealOrNoDeal
 
            }
 
+        
         private void dealerPop_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
         {
-
+            var offer = BankerOffer();
+            dealerPop.Content = $"The banker has offered you {offer}";
         }
 
         private void dealerPop_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-
+            //Deal accepted
         }
 
         private void dealerPop_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-
+            //Deal declined
         }
     }
     }
