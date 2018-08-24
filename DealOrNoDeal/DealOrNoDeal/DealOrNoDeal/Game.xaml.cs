@@ -35,6 +35,7 @@ namespace DealOrNoDeal
         private StorageFile file;
         private string savePath;
         private Case userCase = GameLogic.userCase;
+        private bool canPlay = false;
 
         ImageBrush brush1 = new ImageBrush();
 
@@ -47,8 +48,12 @@ namespace DealOrNoDeal
             if (go != null)
             {
                 userCase = go.UserCase;
+                GameLogic.cases = go.Cases;
             }
-            GameLogic.ProduceCases();
+            else
+            {
+                GameLogic.ProduceCases();
+            }
             ButtonCreation();
             ValueDisplayCreation();                       
         }
@@ -73,13 +78,20 @@ namespace DealOrNoDeal
                         b.Width = 100;
                         b.Height = 90;
                         b.HorizontalAlignment = HorizontalAlignment.Center;
-                        //b.VerticalAlignment = VerticalAlignment.Stretch;
-                        //b.Margin = new Thickness(5);
-                        //b.Background = new SolidColorBrush(Colors.Beige);
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
-                        b.IsEnabled = false;
+                        Case c = GameLogic.cases[count - 1];
+                        //foreach (Case c in GameLogic.cases)
+                        //{
+                        //c.CaseValue.ToString().Equals(caseName) && 
+                        if (c.IsOpened)
+                            {
+                                b.IsEnabled = false;
+                            }
+                        //}
+                        //b.IsEnabled = false;
                         gameGrid.Children.Add(b);
+                        
                         //button.DataContext = cell;
                         //BoolToBrushConverter con = new BoolToBrushConverter();
                         //Binding b = new Binding();
@@ -88,6 +100,7 @@ namespace DealOrNoDeal
                         //b.Converter = con;
                         //button.SetBinding(Button.BackgroundProperty, b);
                         //button.Click += cell.Toggle;
+
                         b.Click += Case_Click;
                         count++;
                     }
@@ -105,12 +118,14 @@ namespace DealOrNoDeal
                 tb.HorizontalAlignment = HorizontalAlignment.Stretch;
                 tb.VerticalAlignment = VerticalAlignment.Stretch;
                 tb.TextAlignment = TextAlignment.Center;
-                
-                //if (c.IsOpened)
-                //{
-                //    tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                //}
-
+                tb.Foreground = new SolidColorBrush(Colors.White);
+                foreach (Case c in GameLogic.cases)
+                {
+                    if (c.CaseValue.ToString().Equals(value.ToString()) && c.IsOpened)
+                    {
+                        tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                    }
+                }
                 if (count2 > 13)
                 {
                     RightStackPanel.Children.Add(tb);
@@ -121,36 +136,15 @@ namespace DealOrNoDeal
                 }
                 count2++;
             }
-            foreach(Case c in GameLogic.cases)
-            {
-                if (c.IsOpened)
-                {
-                    var i = RightStackPanel.Children.ToList();
-                    foreach (TextBlock v in i)
-                    {
-                        double.TryParse(v.Text, out double d);
-                        if (d == c.CaseValue)
-                        {
-                            v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                        }
-                    }
-                    var j = LeftStackPanel.Children.ToList();
-                    foreach (TextBlock v in j)
-                    {
-                        double.TryParse(v.Text, out double d);
-                        if (d == c.CaseValue)
-                        {
-                            v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                        }
-                    }
-                }
-            }
         }
 
         private void Case_Click(object sender, RoutedEventArgs e)
         {
-            var b = sender as Button;
-            CaseReveal(b);
+            if (canPlay)
+            {
+                var b = sender as Button;
+                CaseReveal(b);
+            }  
         }
 
         private void CaseReveal(Button b)
@@ -187,7 +181,8 @@ namespace DealOrNoDeal
         {
             if (string.IsNullOrEmpty(savePath))
             {
-                go.UserCase = new Case() { CaseNumber = GameLogic.userCase.CaseNumber, CaseValue = GameLogic.userCase.CaseValue, IsOpened = GameLogic.userCase.IsOpened };
+                go = new GameObject();
+                go.UserCase = userCase;
                 go.Cases = GameLogic.cases;
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.FileTypeChoices.Add("type", new List<string> { ".dond" });
@@ -214,13 +209,24 @@ namespace DealOrNoDeal
             instructions.VerticalAlignment = VerticalAlignment.Stretch;
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
-            var list = gameGrid.Children.ToList();
-            for(int i = 4; i < 30; i++)
-            {
-                Button b = (Button)list[i];
-                b.IsEnabled = true;
-                //b.Click += button_counter;
-            }
+            canPlay = true;
+            //var list = gameGrid.Children.ToList();
+            //for(int i = 4; i < 30; i++)
+            //{
+            //    Button b = (Button)list[i];
+            //    foreach (Case c in GameLogic.cases)
+            //    {
+            //        if (b.Content.ToString().Equals(c.CaseNumber.ToString()) && c.IsOpened)
+            //        {
+            //            b.IsEnabled = false;
+            //        }
+            //        else
+            //        {
+            //            b.IsEnabled = true;
+            //        }
+            //    }
+            //    //b.Click += button_counter;
+            //}
         }
 
         private void button_counter(object sender, EventArgs e)
