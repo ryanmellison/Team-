@@ -35,6 +35,7 @@ namespace DealOrNoDeal
         private StorageFile file;
         private string savePath;
         private Case userCase = GameLogic.userCase;
+        private int buttoncount = 1;
         private bool canPlay = false;
 
         ImageBrush brush1 = new ImageBrush();
@@ -55,7 +56,7 @@ namespace DealOrNoDeal
                 GameLogic.ProduceCases();
             }
             ButtonCreation();
-            ValueDisplayCreation();                       
+            ValueDisplayCreation();
         }
 
         private void ButtonCreation()
@@ -87,6 +88,8 @@ namespace DealOrNoDeal
                         }
                         gameGrid.Children.Add(b);
                         b.Click += Case_Click;
+                        b.Tapped += button_tapped;
+
                         count++;
                     }
                 }
@@ -160,6 +163,7 @@ namespace DealOrNoDeal
                 }
                 b.IsEnabled = false;
                 GameLogic.cases[caseNumber - 1].IsOpened = true;
+                GameContinue(instructions);
                 //instructions.Text = "You selected a case.";
             }
         }
@@ -202,10 +206,21 @@ namespace DealOrNoDeal
             instructions.FontSize = 20;
         }
 
-        private int buttoncount = 0;
-        private void button_counter(object sender, EventArgs e)
+
+        private void GameContinue(TextBlock inst)
         {
-            //buttoncount++;
+            if (buttoncount == 5)
+            {
+                inst.Text = "Select 4 cases";
+                //se t can play to false and then call in banker
+            }
         }
+
+        private void button_tapped(object sender, TappedRoutedEventArgs e)
+        {
+            buttoncount += 1;
+
+        }
+
     }
 }
