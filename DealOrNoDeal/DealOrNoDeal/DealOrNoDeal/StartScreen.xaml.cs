@@ -71,7 +71,21 @@ namespace DealOrNoDeal
 
            }
 
+        private void dealerPop_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
+        {
+
         }
+
+        private void dealerPop_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void dealerPop_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+    }
     }
 
 

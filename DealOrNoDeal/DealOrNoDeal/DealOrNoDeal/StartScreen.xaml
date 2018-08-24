@@ -54,6 +54,19 @@
                 Background="White">
         </Button>
 
+        <ContentDialog
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            x:Name="dealerPop"
+            PrimaryButtonText="Deal"
+            SecondaryButtonText="No Deal"
+            Opened="dealerPop_Opened"
+            PrimaryButtonClick="dealerPop_PrimaryButtonClick"
+            SecondaryButtonClick="dealerPop_SecondaryButtonClick"
+            FullSizeDesired="True"
+            >   
+        
+        </ContentDialog>
     </Grid>
 
 </Page>
