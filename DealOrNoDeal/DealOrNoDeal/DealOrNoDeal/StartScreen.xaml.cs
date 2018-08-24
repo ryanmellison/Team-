@@ -62,7 +62,9 @@ namespace DealOrNoDeal
             {
                 using (Stream st = await file.OpenStreamForReadAsync())
                 {
-                    Game.go = (GameObject)ser.Deserialize(st);
+                    GameObject go = (GameObject)ser.Deserialize(st);
+                    Game.go = new GameObject();
+                    Game.go = go;
                 }
 
            }
