@@ -203,30 +203,16 @@ namespace DealOrNoDeal
         {
             InstructionsStackPanel.Children.Remove(StartGameButton);
             instructions = new TextBlock();
+            instructions.Margin = new Thickness(0, 300, 0, 0);
             instructions.TextWrapping = TextWrapping.WrapWholeWords;
             instructions.Text = "Please select your intial case. Your intial case will be your case filled with your potential prize money unless you take a deal with the dealer. Select wisely.";
-            instructions.HorizontalAlignment = HorizontalAlignment.Stretch;
-            instructions.VerticalAlignment = VerticalAlignment.Stretch;
+            instructions.HorizontalAlignment = HorizontalAlignment.Center;
+            instructions.VerticalAlignment = VerticalAlignment.Bottom;
             instructions.TextAlignment = TextAlignment.Center;
             InstructionsStackPanel.Children.Add(instructions);
             canPlay = true;
-            //var list = gameGrid.Children.ToList();
-            //for(int i = 4; i < 30; i++)
-            //{
-            //    Button b = (Button)list[i];
-            //    foreach (Case c in GameLogic.cases)
-            //    {
-            //        if (b.Content.ToString().Equals(c.CaseNumber.ToString()) && c.IsOpened)
-            //        {
-            //            b.IsEnabled = false;
-            //        }
-            //        else
-            //        {
-            //            b.IsEnabled = true;
-            //        }
-            //    }
-            //    //b.Click += button_counter;
-            //}
+            instructions.Foreground = new SolidColorBrush(Colors.White);
+            instructions.FontSize = 20;
         }
 
         private void button_counter(object sender, EventArgs e)
