@@ -8,8 +8,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Serialization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Media.Core;
-using Windows.Media.Playback;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -39,16 +37,8 @@ namespace DealOrNoDeal
             {
                 Logo.Source = new BitmapImage(new Uri("ms-appx:///Assets/VisualAssets/dond_easterLogo.png"));
             }
-            Play("ms-appx:///Assets/AudioAssets/Theme Song.mp3");
         }
 
-        private void Play(string fileName)
-        {
-            var mediaPlayer = new MediaPlayer();
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri($"{fileName}", UriKind.RelativeOrAbsolute));
-            mediaPlayer.Play();
-            mediaPlayer.IsLoopingEnabled = true;
-        }
 
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
@@ -80,7 +70,6 @@ namespace DealOrNoDeal
                 this.Frame.Navigate(typeof(Game));
             }
 
-<<<<<<< HEAD
            }
 
         
@@ -100,11 +89,6 @@ namespace DealOrNoDeal
             //Deal declined
         }
     }
-=======
-        }
-
->>>>>>> master
     }
-}
 
 
