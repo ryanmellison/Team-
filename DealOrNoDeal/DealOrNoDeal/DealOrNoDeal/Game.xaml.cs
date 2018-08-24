@@ -81,26 +81,11 @@ namespace DealOrNoDeal
                         Grid.SetColumn(b, j);
                         Grid.SetRow(b, i);
                         Case c = GameLogic.cases[count - 1];
-                        //foreach (Case c in GameLogic.cases)
-                        //{
-                        //c.CaseValue.ToString().Equals(caseName) && 
                         if (c.IsOpened)
-                            {
+                        {
                                 b.IsEnabled = false;
-                            }
-                        //}
-                        //b.IsEnabled = false;
+                        }
                         gameGrid.Children.Add(b);
-                        
-                        //button.DataContext = cell;
-                        //BoolToBrushConverter con = new BoolToBrushConverter();
-                        //Binding b = new Binding();
-                        //b.Path = new PropertyPath("IsAlive");
-                        //b.Mode = BindingMode.TwoWay;
-                        //b.Converter = con;
-                        //button.SetBinding(Button.BackgroundProperty, b);
-                        //button.Click += cell.Toggle;
-
                         b.Click += Case_Click;
                         count++;
                     }
@@ -160,6 +145,7 @@ namespace DealOrNoDeal
                     if (d == caseValue)
                     {
                         v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        v.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
                 var j = LeftStackPanel.Children.ToList();
@@ -169,6 +155,7 @@ namespace DealOrNoDeal
                     if (d == caseValue)
                     {
                         v.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                        v.Foreground = new SolidColorBrush(Colors.Black);
                     }
                 }
                 b.IsEnabled = false;
