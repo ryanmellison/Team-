@@ -68,6 +68,20 @@
             </Button>
 
         </StackPanel>
+        <ContentDialog
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="3"
+            x:Name="dealerPop"
+            PrimaryButtonText="Deal"
+            SecondaryButtonText="No Deal"
+            PrimaryButtonClick="dealerPop_PrimaryButtonClick"
+            SecondaryButtonClick="dealerPop_SecondaryButtonClick"
+            Opened="dealerPop_Opened"
+            FullSizeDesired="True"
+            >
+        </ContentDialog>
     </Grid>
     
 
