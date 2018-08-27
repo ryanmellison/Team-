@@ -37,9 +37,9 @@ namespace DealOrNoDeal
         private string savePath;
         private Case userCase = GameLogic.userCase;
         private bool canPlay = false;
-        private bool winCondition = false;
         private int remainingturniteration = 6;
         private int buttonCount = 0;
+
 
         ImageBrush brush1 = new ImageBrush();
 
@@ -167,7 +167,7 @@ namespace DealOrNoDeal
                 }
                 b.IsEnabled = false;
                 GameLogic.cases[caseNumber - 1].IsOpened = true;
-                GameContinue(instructions, caseNumber, b);
+                GameContinue(caseNumber, b);
             }
         }
 
@@ -211,13 +211,14 @@ namespace DealOrNoDeal
         }
 
 
-        private async void GameContinue(TextBlock inst, int caseNumber, Button b)
+        private async void GameContinue(int caseNumber, Button b)
         {
-            inst.Text = $"Please select {remainingturniteration} more cases";
-
-           // b.IsEnabled = false;
-            //GameLogic.cases[caseNumber - 1].IsOpened = true;
+            var inst = instructions;
+            //b.IsEnabled = false;
+            //GameLogic.cases[caseNumber - 1].IsOpened = false;
             //usercase = case selected
+
+            inst.Text = $"Choose {remainingturniteration} more cases.";
 
             if (buttonCount == 6)
             {
@@ -226,47 +227,41 @@ namespace DealOrNoDeal
                 inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
                 canPlay = true;
             }
-            else if (buttonCount == 11)
+            if (buttonCount == 11)
             {
                 canPlay = false;
                 await CallTheBanker();
                 inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
                 canPlay = true;
             }
-            else if (buttonCount == 15)
+            if (buttonCount == 15)
             {
                 canPlay = false;
                 await CallTheBanker();
                 inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
                 canPlay = true;
             }
-            else if (buttonCount == 18)
+            if (buttonCount == 18)
             {
                 canPlay = false;
                 await CallTheBanker();
                 inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
                 canPlay = true;
             }
-
-            else if (buttonCount == 20)
+            if (buttonCount == 20)
             {
                 canPlay = false;
                 await CallTheBanker();
                 inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
                 canPlay = true;
             }
-
-           else if (buttonCount == 21)
+            if (buttonCount >= 21)
             {
-                for (int i = 21; i <= 26; i++)
-                {
-                    canPlay = false;
-                    await CallTheBanker();
-                    inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
-                    canPlay = true;
-                }
+                canPlay = false;
+                await CallTheBanker();
+                inst.Text = $"Let's continue! Choose {remainingturniteration} more cases.";
+                canPlay = true;
             }
-
         }
 
 
@@ -278,8 +273,6 @@ namespace DealOrNoDeal
             {
                 remainingturniteration--;
             }
-            //if user choses to end game == winCondition==true new page with some text (i.e congrats) with amount of money "won" else continue
-
         }
 
         private void button_tapped(object sender, TappedRoutedEventArgs e)
@@ -290,19 +283,19 @@ namespace DealOrNoDeal
 
         private void dealerPop_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            winCondition = true;
-
+            this.Frame.Navigate(typeof(EndGameScreen));
         }
 
         private void dealerPop_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            winCondition = false;
+            //nothing to be done
         }
 
+        public static double offer;
         private void dealerPop_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
         {
-            double offer = GameLogic.BankerOffer();
-            offer = Math.Round(offer, 3);
+            offer = GameLogic.BankerOffer();
+            offer = Math.Round(offer, 2);
             dealerPop.Content = $"The Banker has offered you ${offer} for your case";
         }
     }
