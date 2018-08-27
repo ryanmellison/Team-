@@ -77,7 +77,8 @@ namespace DealOrNoDeal
                     Game.go = go;
                 }
 
-        }
+            }
 
+        }
     }
 }
