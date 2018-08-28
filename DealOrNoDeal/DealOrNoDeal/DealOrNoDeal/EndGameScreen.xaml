@@ -16,10 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+
         </Grid.RowDefinitions>
 
         <Image x:Name="Logo" Width="900" Source="Assets/VisualAssets/Deal_or_No_Deal_Logo.png" HorizontalAlignment="Center" Margin="0,76,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
@@ -30,8 +27,5 @@
                     Grid.ColumnSpan="3"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"/>
-        <TextBlock x:Name="EndGameText" Text="You won" HorizontalAlignment="Center" FontSize="100" Margin="0,99,0,86" Grid.Row="2" RenderTransformOrigin="0.469,0.481" Grid.RowSpan="2" VerticalAlignment="Stretch" />
-
-
     </Grid>
 </Page>

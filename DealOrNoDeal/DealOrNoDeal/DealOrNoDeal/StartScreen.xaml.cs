@@ -76,6 +76,7 @@ namespace DealOrNoDeal
                     Game.go = new GameObject();
                     Game.go = go;
                 }
+                this.Frame.Navigate(typeof(Game));
 
             }
 

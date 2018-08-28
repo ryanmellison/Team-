@@ -26,15 +26,19 @@ namespace DealOrNoDeal
         public EndGameScreen()
         {
             this.InitializeComponent();
+            EndText();
         }
 
         private void EndText()
         {
             double moneyWon = Game.offer;
             TextBlock EndGameText = new TextBlock();
-            EndGameText.Text = $"You're going home with: {moneyWon} in cash!";
-            EndGameStackPanel.Children.Add(EndGameText);
+            EndGameText.HorizontalAlignment = HorizontalAlignment.Center;
+            EndGameText.VerticalAlignment = VerticalAlignment.Center;
+            EndGameText.FontSize = 50;
+            EndGameText.Text = $"You're going home with: ${moneyWon} in cash!";
             EndGameText.Foreground = new SolidColorBrush(Colors.White);
+            EndGameStackPanel.Children.Add(EndGameText);
         }
     }
 }

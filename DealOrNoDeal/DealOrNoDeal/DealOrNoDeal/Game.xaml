@@ -76,9 +76,9 @@
             x:Name="dealerPop"
             PrimaryButtonText="Deal"
             SecondaryButtonText="No Deal"
-            PrimaryButtonClick="dealerPop_PrimaryButtonClick"
-            SecondaryButtonClick="dealerPop_SecondaryButtonClick"
-            Opened="dealerPop_Opened"
+            PrimaryButtonClick="DealerPop_PrimaryButtonClick"
+            SecondaryButtonClick="DealerPop_SecondaryButtonClick"
+            Opened="DealerPop_Opened"
             FullSizeDesired="True"
             >
         </ContentDialog>
