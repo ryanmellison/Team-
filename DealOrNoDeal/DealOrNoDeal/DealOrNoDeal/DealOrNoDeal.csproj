@@ -136,7 +136,13 @@
     <Content Include="Assets\VisualAssets\deal-or-no-deal.png" />
     <Content Include="Assets\VisualAssets\Deal_or_No_Deal_Logo.png" />
     <Content Include="Assets\VisualAssets\DfrPif2UcAAisdh.png" />
+    <Content Include="Assets\VisualAssets\dond.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\VisualAssets\dond.altform-unplated_targetsize-32.png" />
     <Content Include="Assets\VisualAssets\dond.png" />
+    <Content Include="Assets\VisualAssets\dond.scale-125.png" />
+    <Content Include="Assets\VisualAssets\dond.scale-150.png" />
+    <Content Include="Assets\VisualAssets\dond.targetsize-24.png" />
+    <Content Include="Assets\VisualAssets\dond.targetsize-32.png" />
     <Content Include="Assets\VisualAssets\dond_blank.jpg" />
     <Content Include="Assets\VisualAssets\dond_easterLogo.png" />
     <Content Include="Assets\VisualAssets\dond_logo.png" />

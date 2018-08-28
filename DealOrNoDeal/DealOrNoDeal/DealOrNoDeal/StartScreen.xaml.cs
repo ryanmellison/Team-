@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -52,7 +53,7 @@ namespace DealOrNoDeal
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Game));
+            this.Frame.Navigate(typeof(Game), null, new DrillInNavigationTransitionInfo());
         }
 
         private void Options_Click(object sender, RoutedEventArgs e)
@@ -76,7 +77,8 @@ namespace DealOrNoDeal
                     Game.go = new GameObject();
                     Game.go = go;
                 }
-                this.Frame.Navigate(typeof(Game));
+                this.Frame.Navigate(typeof(Game), null, new DrillInNavigationTransitionInfo());
+
 
             }
 
