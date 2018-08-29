@@ -27,5 +27,17 @@
                     Grid.ColumnSpan="3"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"/>
+        
+        <Button Content="Start Menu"
+                Click="NewGame_Click"
+                Grid.Row="3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="75"
+                Width="150"
+                FontSize="25"
+                Background="White"/>
+
+
     </Grid>
 </Page>

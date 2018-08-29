@@ -43,17 +43,7 @@
                 FontSize="25"
                 Background="White">
         </Button>
-        <Button Content="Options"
-                Click="Options_Click"
-                Grid.Row="4"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Height="75"
-                Width="150"
-                FontSize="25"
-                Background="White">
-        </Button>
-
+     
     </Grid>
 
 </Page>

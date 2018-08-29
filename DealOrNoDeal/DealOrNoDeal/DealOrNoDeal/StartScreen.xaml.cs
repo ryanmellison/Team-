@@ -58,7 +58,7 @@ namespace DealOrNoDeal
 
         private void Options_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Options));
+            //this.Frame.Navigate(typeof(Options));
         }
         private async void Open_Click(object sender, RoutedEventArgs e)
         {

@@ -39,7 +39,8 @@ namespace DealOrNoDeal
         private bool canPlay = false;
         private int remainingTurnIteration = 6;
         private int buttonCount = 0;
-
+        public static double offer;
+        private int openedCases;
 
         ImageBrush brush1 = new ImageBrush();
 
@@ -225,7 +226,6 @@ namespace DealOrNoDeal
                 canPlay = false;
                 await CallTheBanker();
                 remainingTurnIteration = 5;
-
                 inst.Text = $"Let's continue! Choose {remainingTurnIteration} more cases.";
                 canPlay = true;
             }
@@ -234,7 +234,6 @@ namespace DealOrNoDeal
                 canPlay = false;
                 await CallTheBanker();
                 remainingTurnIteration = 4;
-
                 inst.Text = $"Let's continue! Choose {remainingTurnIteration} more cases.";
                 canPlay = true;
             }
@@ -243,7 +242,6 @@ namespace DealOrNoDeal
                 canPlay = false;
                 await CallTheBanker();
                 remainingTurnIteration = 3;
-
                 inst.Text = $"Let's continue! Choose {remainingTurnIteration} more cases.";
                 canPlay = true;
             }
@@ -252,7 +250,6 @@ namespace DealOrNoDeal
                 canPlay = false;
                 await CallTheBanker();
                 remainingTurnIteration = 2;
-
                 inst.Text = $"Let's continue! Choose {remainingTurnIteration} more cases.";
                 canPlay = true;
             }
@@ -266,16 +263,46 @@ namespace DealOrNoDeal
             }
             if (buttonCount >= 21)
             {
+                int count = 0;
+                foreach(Case c in GameLogic.cases)
+                {
+                    if(c.IsOpened == false)
+                    {
+                        count++;
+                    }
+                }
                 canPlay = false;
-                await CallTheBanker();
+                if(count == 1)
+                {
+                    await CallTheBanker();
+                }
                 remainingTurnIteration = 1;
                 inst.Text = $"Let's continue! Choose {remainingTurnIteration} more cases.";
                 canPlay = true;
             }
             remainingTurnIteration--;
+            if (buttonCount >= 24)
+            {
+                inst.Text = "Game over!";
+                GameCannotContinue(caseNumber);
+            }
         }
 
-
+        private void GameCannotContinue(int caseNumber)
+        {
+            foreach (Case c in GameLogic.cases)
+            {
+                if (c.IsOpened == true)
+                {
+                    openedCases++;
+                }
+            }
+            if (openedCases >= 26)
+            {
+                offer = userCase.CaseValue;
+                this.Frame.Navigate(typeof(EndGameScreen));
+            }
+        }
 
         private async Task CallTheBanker()
         {
@@ -298,10 +325,9 @@ namespace DealOrNoDeal
 
         private void DealerPop_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            //nothing to be done
+            //nothing to be done, the popup is dismissed and the game continues
         }
 
-        public static double offer;
         private void DealerPop_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
         {
             offer = GameLogic.BankerOffer();

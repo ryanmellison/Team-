@@ -40,5 +40,12 @@ namespace DealOrNoDeal
             EndGameText.Foreground = new SolidColorBrush(Colors.White);
             EndGameStackPanel.Children.Add(EndGameText);
         }
+
+        private void NewGame_Click(object sender, RoutedEventArgs e)
+        {
+            Game.go = null;
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
     }
 }
